@@ -36,8 +36,7 @@ Example computer
 
 ls -la
 
-screenshot of shell
-Contributors sunglassesmuscle
+#Contributors
 
     Bonu Samuel
     Afework Minilik
