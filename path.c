@@ -1,44 +1,27 @@
 #include "shell.h"
 
 /**
-* append_path - adds path to command
-* @path: path of command
-* @command: user entered command
-*
-* Return: buffer containing command with path on success
-* NULL on failure
+* find_path - finds the path from the global enviroment
+* Return: NULL if path is not found or path if path is found.
 */
-char *append_path(char *path, char *command)
+char *find_path(void)
 {
-	char *buf;
-	size_t i = 0, j = 0;
+	int x;
+	char **env = environ, *path = NULL;
 
-	if (command == 0)
-		command = "";
-
-	if (path == 0)
-		path = "";
-
-	buf = malloc(sizeof(char) * (_strlen(path) + _strlen(command) + 2));
-	if (!buf)
-		return (NULL);
-
-	while (path[i])
+	while (*env)
 	{
-		buf[i] = path[i];
-		i++;
+		if (_strncmp(*env, "PATH=", 5) == 0)
+		{
+			path = *env;
+			while (*path && x < 5)
+			{
+				path++;
+				x++;
+			}
+			return (path);
+		}
+		env++;
 	}
-
-	if (path[i - 1] != '/')
-	{
-		buf[i] = '/';
-		i++;
-	}
-	while (command[j])
-	{
-		buf[i + j] = command[j];
-		j++;
-	}
-	buf[i + j] = '\0';
-	return (buf);
+	return (NULL);
 }
